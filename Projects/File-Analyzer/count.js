@@ -16,10 +16,12 @@ function showHelp() {
   console.log(" node count.js sample.txt --detail");
   process.exit(0);
 }
+
 //!Show help if no arguments or help flag
 if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
   showHelp();
 }
+
 //Pass command line options
 const filePath = args[0];
 const showDetail = args.includes("--detail") || args.includes("-d");
@@ -64,9 +66,28 @@ function countStatistics(buffer) {
     const averageWordLength =
       wordLengths.reduce((sum, length) => sum + length, 0) / wordCount || 0;
     //! Count paragraphs (separated by double newlines)
-    const paragraphCount = content.split(/\r?\n\s*\)
+    const paragraphCount = content
+      .split(/\r?\n\s*\r?\n/)
+      .filter((para) => para.trim().length > 0).length;
+    //Find most common words
+    const wordFrequency = {};
+    words.forEach((word) => {
+      const normalizedWord = word.toLowerCase().replace(/[^\w]/g, "");
+      if (normalizedWord.length > 0) {
+        wordFrequency[normalizedWord] =
+          (wordFrequency[normalizedWord] || 0) + 1;
+      }
+    });
+    const sortedWords = Object.entries(wordFrequency)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10);
   }
+  //Add statistics
+  stats = {
+    ...stats,
+  };
 }
+
 //Format byte size to human readable format
 //display the statistics
 //Main execution
