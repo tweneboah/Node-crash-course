@@ -1,0 +1,136 @@
+<div class="container py-5 mt-5">
+  <div class="row mb-5">
+    <div class="col-lg-8">
+      <h1 class="display-4 fw-bold" style="color: var(--primary-color)">
+        Product Catalog
+      </h1>
+      <p class="lead text-muted mb-0">
+        Browse our collection of products available for purchase
+      </p>
+    </div>
+    <div
+      class="col-lg-4 d-flex align-items-center justify-content-lg-end mt-3 mt-lg-0"
+    >
+      <a href="/products/new" class="btn btn-primary px-4 py-2 rounded-pill">
+        <i class="bi bi-plus-circle me-2"></i> Add New Product
+      </a>
+    </div>
+  </div>
+
+  <% if(products.length === 0) { %>
+  <div class="card border-0 shadow-sm rounded-4 p-5 text-center">
+    <div class="py-5">
+      <i
+        class="bi bi-bag-x"
+        style="font-size: 4rem; color: var(--light-text)"
+      ></i>
+      <h3 class="mt-4 mb-3">No products found</h3>
+      <p class="text-muted mb-4">
+        Get started by adding your first product to the catalog.
+      </p>
+      <a href="/products/new" class="btn btn-primary px-4 py-2 rounded-pill">
+        <i class="bi bi-plus-circle me-2"></i> Add Your First Product
+      </a>
+    </div>
+  </div>
+  <% } else { %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% products.forEach(product => { %>
+    <div class="col">
+      <div
+        class="card h-100 border-0 shadow-sm rounded-4 product-card overflow-hidden"
+      >
+        <div class="product-img-container">
+          <img
+            src="<%= product.imageUrl %>"
+            class="card-img-top product-img"
+            alt="<%= product.name %>"
+          />
+          <div class="product-price">
+            <span class="badge rounded-pill"
+              >$<%= product.price.toFixed(2) %></span
+            >
+          </div>
+        </div>
+        <div class="card-body p-4">
+          <h5 class="card-title fw-bold mb-3"><%= product.name %></h5>
+          <p class="card-text text-muted mb-4">
+            <%= product.description.length > 100 ?
+            product.description.substring(0, 100) + '...' : product.description
+            %>
+          </p>
+          <div class="d-flex mt-auto gap-2">
+            <a
+              href="/products/<%= product._id %>"
+              class="btn btn-outline-primary w-100 rounded-pill"
+            >
+              <i class="bi bi-eye me-1"></i> Details
+            </a>
+            <a
+              href="/checkout/<%= product._id %>"
+              class="btn btn-success w-100 rounded-pill"
+            >
+              <i class="bi bi-cart-plus me-1"></i> Buy Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+</div>
+
+<style>
+  .product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .product-img-container {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .product-card:hover .product-img {
+    transform: scale(1.05);
+  }
+
+  .product-price {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .product-price .badge {
+    background: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-title {
+    color: var(--text-color);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .product-img-container {
+      height: 180px;
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+<div class="container py-5 mt-5">
+  <div class="row">
+    <div class="col-lg-6 mb-5 mb-lg-0">
+      <div class="product-image-container rounded-4 overflow-hidden shadow-lg">
+        <img
+          src="<%= product.imageUrl %>"
+          class="img-fluid w-100 product-image"
+          alt="<%= product.name %>"
+        />
+        <div class="product-price-overlay">
+          <span class="badge rounded-pill"
+            >$<%= product.price.toFixed(2) %></span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="product-details">
+        <h1 class="display-4 fw-bold mb-4" style="color: var(--primary-color)">
+          <%= product.name %>
+        </h1>
+
+        <div class="product-description mb-5">
+          <p class="lead text-muted mb-4"><%= product.description %></p>
+        </div>
+
+        <div class="d-flex flex-column flex-md-row gap-3 mb-5">
+          <a
+            href="/checkout/<%= product._id %>"
+            class="btn btn-success btn-lg px-5 py-3 rounded-pill"
+          >
+            <i class="bi bi-cart-plus me-2"></i> Buy Now
+          </a>
+          <a
+            href="/products"
+            class="btn btn-outline-secondary btn-lg px-5 py-3 rounded-pill"
+          >
+            <i class="bi bi-arrow-left me-2"></i> Back to Products
+          </a>
+        </div>
+
+        <div class="product-meta bg-light rounded-4 p-4">
+          <div class="d-flex flex-column gap-2">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-upc me-3" style="color: var(--primary-color)"></i>
+              <div>
+                <small class="text-muted d-block">Product ID</small>
+                <span class="fw-medium"><%= product._id %></span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <i
+                class="bi bi-calendar me-3"
+                style="color: var(--primary-color)"
+              ></i>
+              <div>
+                <small class="text-muted d-block">Created</small>
+                <span class="fw-medium"
+                  ><%= new Date(product.createdAt).toLocaleString() %></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .product-image-container {
+    position: relative;
+    height: 500px;
+    background: #f8f9fa;
+  }
+
+  .product-image {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .product-image-container:hover .product-image {
+    transform: scale(1.05);
+  }
+
+  .product-price-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .product-price-overlay .badge {
+    background: var(--primary-color);
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .product-meta {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .product-meta i {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 992px) {
+    .product-image-container {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-image-container {
+      height: 300px;
+    }
+
+    .display-4 {
+      font-size: 2.5rem;
+    }
+  }
+</style>

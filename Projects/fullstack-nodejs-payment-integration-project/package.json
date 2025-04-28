@@ -1,0 +1,26 @@
+{
+  "name": "fullstack-nodejs-payment-integration-project",
+  "version": "1.0.0",
+  "description": "Fullstack payment integration project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "author": "Masynctech",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.13.2",
+    "stripe": "^18.0.0"
+  }
+}

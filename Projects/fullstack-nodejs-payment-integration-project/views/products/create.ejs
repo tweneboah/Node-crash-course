@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Product</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+      :root {
+        --primary: #2563eb;
+        --dark: #1e293b;
+        --light: #f1f5f9;
+        --border: #e2e8f0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--light);
+        min-height: 100vh;
+        padding: 2rem 0;
+      }
+
+      .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .form-card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .form-title {
+        color: var(--dark);
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .form-subtitle {
+        color: #64748b;
+        font-size: 1rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        color: var(--dark);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .form-control {
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--border);
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+      }
+
+      .form-control::placeholder {
+        color: #94a3b8;
+      }
+
+      textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .btn-submit {
+        background: var(--primary);
+        color: white;
+        padding: 1rem 2rem;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        border: none;
+        width: 100%;
+        transition: all 0.3s ease;
+      }
+
+      .btn-submit:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+      }
+
+      .btn-cancel {
+        background: white;
+        color: var(--dark);
+        padding: 1rem 2rem;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        border: 2px solid var(--border);
+        width: 100%;
+        transition: all 0.3s ease;
+      }
+
+      .btn-cancel:hover {
+        background: var(--light);
+        border-color: #cbd5e1;
+        transform: translateY(-2px);
+      }
+
+      .form-actions {
+        display: grid;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .image-preview {
+        width: 100%;
+        height: 200px;
+        background: var(--light);
+        border-radius: 0.75rem;
+        border: 2px dashed var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: 0.5rem;
+      }
+
+      .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .image-placeholder {
+        text-align: center;
+        color: #94a3b8;
+      }
+
+      .image-placeholder i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .form-text {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .form-container {
+          padding: 0 1rem;
+        }
+
+        .form-card {
+          padding: 2rem 1.5rem;
+        }
+
+        .form-title {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="form-card">
+        <div class="form-header">
+          <h1 class="form-title">Add New Product</h1>
+          <p class="form-subtitle">
+            Fill in the details to create a new product
+          </p>
+        </div>
+
+        <form action="/products" method="POST">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name" class="form-label">Product Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Enter product name"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="price" class="form-label">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  name="price"
+                  required
+                  placeholder="Enter price"
+                  step="0.01"
+                  min="0"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              required
+              placeholder="Enter product description"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="imageUrl" class="form-label">Product Image URL</label>
+            <input
+              type="url"
+              class="form-control"
+              id="imageUrl"
+              name="imageUrl"
+              placeholder="https://example.com/image.jpg"
+              onchange="previewImage(this)"
+            />
+            <div class="form-text">Leave blank to use a placeholder image.</div>
+            <div class="image-preview" id="imagePreview">
+              <div class="image-placeholder">
+                <i class="bi bi-image"></i>
+                <p>No image URL provided</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-submit">
+              <i class="bi bi-plus-circle me-2"></i>Create Product
+            </button>
+            <a href="/products" class="btn btn-cancel">
+              <i class="bi bi-x-circle me-2"></i>Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function previewImage(input) {
+        const preview = document.getElementById("imagePreview");
+        const url = input.value;
+
+        if (url) {
+          preview.innerHTML = `<img src="${url}" alt="Preview" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'image-placeholder\'><i class=\'bi bi-image\'></i><p>Invalid image URL</p></div>';">`;
+        } else {
+          preview.innerHTML = `
+                    <div class="image-placeholder">
+                        <i class="bi bi-image"></i>
+                        <p>No image URL provided</p>
+                    </div>
+                `;
+        }
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

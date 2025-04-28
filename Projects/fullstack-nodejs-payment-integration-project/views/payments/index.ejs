@@ -1,0 +1,64 @@
+<h1 class="mb-4">Payment History</h1>
+
+<div class="d-flex justify-content-between mb-4">
+  <div>
+    <a href="/products" class="btn btn-outline-primary">Browse Products</a>
+  </div>
+</div>
+
+<% if(payments.length === 0) { %>
+<div class="alert alert-info">
+  No payments found. Complete a purchase to see payments here.
+</div>
+<% } else { %>
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% payments.forEach(payment => { %>
+          <tr>
+            <td><small class="text-muted"><%= payment._id %></small></td>
+            <td><%= new Date(payment.createdAt).toLocaleString() %></td>
+            <td>
+              <% if (payment.customer) { %> <%= payment.customer.name %><br />
+              <small class="text-muted"><%= payment.customer.email %></small>
+              <% } else { %>
+              <span class="text-muted">Unknown customer</span>
+              <% } %>
+            </td>
+            <td><%= payment.description %></td>
+            <td>$<%= payment.amount.toFixed(2) %></td>
+            <td>
+              <% if (payment.status === 'succeeded') { %>
+              <span class="badge bg-success">Succeeded</span>
+              <% } else if (payment.status === 'pending') { %>
+              <span class="badge bg-warning text-dark">Pending</span>
+              <% } else if (payment.status === 'failed') { %>
+              <span class="badge bg-danger">Failed</span>
+              <% } else if (payment.status === 'canceled') { %>
+              <span class="badge bg-secondary">Canceled</span>
+              <% } else { %>
+              <span class="badge bg-light text-dark"
+                ><%= payment.status %></span
+              >
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% } %>

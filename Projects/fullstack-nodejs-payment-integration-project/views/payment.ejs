@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Payment</title>
+    <!-- Add Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <div class="container py-5 mt-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold" style="color: var(--primary-color)">
+              Complete Payment
+            </h1>
+            <p class="lead text-muted">
+              Please review your order and enter your payment details
+            </p>
+          </div>
+
+          <!-- Order Summary Card -->
+          <div class="card border-0 shadow-sm rounded-4 mb-5">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <div class="checkout-product-img-container">
+                  <img
+                    src="<%= product.imageUrl %>"
+                    class="img-fluid rounded-start product-img"
+                    alt="<%= product.name %>"
+                  />
+                  <div class="product-price-overlay">
+                    <span class="badge rounded-pill"
+                      >$<%= product.price.toFixed(2) %></span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h5
+                    class="card-title fw-bold mb-3"
+                    style="color: var(--primary-color)"
+                  >
+                    <%= product.name %>
+                  </h5>
+                  <p class="card-text text-muted mb-4">
+                    <%= product.description %>
+                  </p>
+                  <div class="customer-info bg-light rounded-3 p-3">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="bi bi-person-circle me-3"
+                        style="color: var(--primary-color)"
+                      ></i>
+                      <div>
+                        <small class="text-muted d-block">Customer</small>
+                        <span class="fw-medium"><%= customer.name %></span>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+                      <i
+                        class="bi bi-envelope me-3"
+                        style="color: var(--primary-color)"
+                      ></i>
+                      <div>
+                        <small class="text-muted d-block">Email</small>
+                        <span class="fw-medium"><%= customer.email %></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Form -->
+          <div class="card border-0 shadow-sm rounded-4 p-4">
+            <form id="payment-form">
+              <h4 class="fw-bold mb-4" style="color: var(--primary-color)">
+                Payment Details
+              </h4>
+
+              <div class="mb-4">
+                <label for="card-element" class="form-label fw-medium"
+                  >Credit or debit card</label
+                >
+                <div
+                  id="card-element"
+                  class="card-element form-control p-3 rounded-3"
+                >
+                  <!-- Stripe Element will be inserted here -->
+                </div>
+                <div
+                  id="card-errors"
+                  role="alert"
+                  class="text-danger mt-2"
+                ></div>
+              </div>
+
+              <div class="d-flex flex-column flex-md-row gap-3">
+                <button
+                  id="submit-button"
+                  type="submit"
+                  class="btn btn-success btn-lg px-5 py-3 rounded-pill flex-grow-1"
+                >
+                  <i class="bi bi-credit-card me-2"></i>
+                  Pay $<%= product.price.toFixed(2) %>
+                </button>
+                <a
+                  href="/products"
+                  class="btn btn-outline-secondary btn-lg px-5 py-3 rounded-pill"
+                >
+                  <i class="bi bi-x-circle me-2"></i>
+                  Cancel
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .checkout-product-img-container {
+        position: relative;
+        height: 100%;
+        min-height: 200px;
+        background: #f8f9fa;
+      }
+
+      .product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .product-price-overlay {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+      }
+
+      .product-price-overlay .badge {
+        background: var(--primary-color);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      .customer-info {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .card-element {
+        border: 1px solid #ced4da;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+
+      .card-element--focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(26, 42, 108, 0.25);
+      }
+
+      .card-element--invalid {
+        border-color: #dc3545;
+      }
+
+      @media (max-width: 768px) {
+        .checkout-product-img-container {
+          min-height: 250px;
+        }
+      }
+    </style>
+
+    <script>
+      // Wait for the DOM to be fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize Stripe
+        const stripe = Stripe("<%= stripePublicKey %>");
+        const elements = stripe.elements();
+
+        // Customize the Stripe Element
+        const style = {
+          base: {
+            color: "#32325d",
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: "antialiased",
+            fontSize: "16px",
+            "::placeholder": {
+              color: "#aab7c4",
+            },
+          },
+          invalid: {
+            color: "#dc3545",
+            iconColor: "#dc3545",
+          },
+        };
+
+        // Create a card Element and mount it
+        const cardElement = elements.create("card", {
+          style: style,
+          hidePostalCode: true,
+        });
+
+        // Mount the card element
+        cardElement.mount("#card-element");
+
+        // Handle validation errors
+        cardElement.on("change", ({ error }) => {
+          const displayError = document.getElementById("card-errors");
+          if (error) {
+            displayError.textContent = error.message;
+          } else {
+            displayError.textContent = "";
+          }
+        });
+
+        // Handle form submission
+        const form = document.getElementById("payment-form");
+        const submitButton = document.getElementById("submit-button");
+
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          // Disable the submit button to prevent multiple submissions
+          submitButton.disabled = true;
+          submitButton.innerHTML =
+            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Processing...';
+
+          try {
+            const { error, paymentIntent } = await stripe.confirmCardPayment(
+              "<%= clientSecret %>",
+              {
+                payment_method: {
+                  card: cardElement,
+                  billing_details: {
+                    name: "<%= customer.name %>",
+                    email: "<%= customer.email %>",
+                  },
+                },
+              }
+            );
+
+            if (error) {
+              // Show error to your customer
+              const errorElement = document.getElementById("card-errors");
+              errorElement.textContent = error.message;
+
+              // Re-enable the submit button
+              submitButton.disabled = false;
+              submitButton.innerHTML =
+                '<i class="bi bi-credit-card me-2"></i> Pay $<%= product.price.toFixed(2) %>';
+            } else {
+              // Payment succeeded - manually update the payment status in our database
+              try {
+                await fetch(`/api/payments/update/${paymentIntent.id}`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    status: "succeeded",
+                    paymentMethod: paymentIntent.payment_method,
+                  }),
+                });
+
+                // Payment succeeded
+                window.location.href = "/success";
+              } catch (updateErr) {
+                console.error("Error updating payment status:", updateErr);
+                window.location.href = "/success";
+              }
+            }
+          } catch (err) {
+            console.error(err);
+            const errorElement = document.getElementById("card-errors");
+            errorElement.textContent = "An unexpected error occurred.";
+
+            // Re-enable the submit button
+            submitButton.disabled = false;
+            submitButton.innerHTML =
+              '<i class="bi bi-credit-card me-2"></i> Pay $<%= product.price.toFixed(2) %>';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
