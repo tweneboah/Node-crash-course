@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Getting Started with Node.js",
+      "author": "John Doe",
+      "content": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.",
+      "date": "2023-04-10",
+      "tags": ["nodejs", "javascript", "tutorial"]
+    },
+    {
+      "id": 2,
+      "title": "Working with JSON in JavaScript",
+      "author": "Jane Smith",
+      "content": "JSON (JavaScript Object Notation) is a lightweight data interchange format.",
+      "date": "2023-04-12",
+      "tags": ["json", "javascript", "data"]
+    },
+    {
+      "id": 3,
+      "title": "Building RESTful APIs with Node.js",
+      "author": "Mike Johnson",
+      "content": "REST (Representational State Transfer) is an architectural style for designing networked applications.",
+      "date": "2023-04-15",
+      "tags": ["api", "rest", "nodejs"]
+    },
+    {
+      "id": 4,
+      "title": "Introduction to Express.js",
+      "author": "Sarah Williams",
+      "content": "Express is a minimal and flexible Node.js web application framework.",
+      "date": "2023-04-18",
+      "tags": ["expressjs", "nodejs", "framework"]
+    },
+    {
+      "id": 5,
+      "title": "Testing Node.js Applications",
+      "author": "Alex Rodriguez",
+      "content": "Testing is an important part of application development.",
+      "date": "2023-04-20",
+      "tags": ["testing", "nodejs", "jest"]
+    }
+  ]
+}

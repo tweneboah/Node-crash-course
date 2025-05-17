@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "age": 28,
+      "role": "developer"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "age": 32,
+      "role": "designer"
+    },
+    {
+      "id": 3,
+      "name": "Mike Johnson",
+      "email": "mike@example.com",
+      "age": 35,
+      "role": "manager"
+    },
+    {
+      "id": 4,
+      "name": "Sarah Williams",
+      "email": "sarah@example.com",
+      "age": 26,
+      "role": "developer"
+    },
+    {
+      "id": 5,
+      "name": "Alex Rodriguez",
+      "email": "alex@example.com",
+      "age": 30,
+      "role": "tester"
+    }
+  ]
+}

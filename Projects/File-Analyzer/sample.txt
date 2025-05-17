@@ -4,15 +4,6 @@ This is a sample text file to test our word counter application. This file conta
 
 Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.
 
-With Node.js, JavaScript can be used for:
-- Server-side programming
-- Command line tools
-- Desktop applications
-- IoT (Internet of Things)
-
-File handling in Node.js is performed using the built-in 'fs' module, which provides an API for interacting with the file system. The fs module provides both synchronous and asynchronous methods for file operations.
-
-Working with buffers in Node.js is essential when dealing with binary data. Buffers are similar to arrays of integers but correspond to raw memory allocations outside the V8 heap. They are useful when you need to work with TCP streams or perform file system operations.
 
 This sample text contains words that repeat, like Node.js, JavaScript, and file, which will help us test the common word counting functionality. File operations are common in Node.js applications. JavaScript is a versatile language that works well with Node.js for various development tasks.
 
