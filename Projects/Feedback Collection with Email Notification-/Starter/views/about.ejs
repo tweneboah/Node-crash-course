@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Feedback Collection System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #4f46e5;
+        --primary-light: #818cf8;
+        --secondary: #f59e0b;
+        --accent: #ec4899;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        color: var(--dark);
+        background: #f3f4f6;
+      }
+
+      .about-section {
+        padding: 80px 0;
+      }
+
+      .about-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .about-title {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .about-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 2px;
+      }
+
+      .about-subtitle {
+        font-size: 1.2rem;
+        color: var(--gray);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        height: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-light) 100%
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 1rem;
+      }
+
+      .feature-description {
+        color: var(--gray);
+        line-height: 1.6;
+      }
+
+      .team-section {
+        background: white;
+        padding: 4rem 0;
+        margin-top: 4rem;
+      }
+
+      .team-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--dark);
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .team-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .team-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+
+      .team-info {
+        padding: 1.5rem;
+      }
+
+      .team-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .team-role {
+        color: var(--primary);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .team-description {
+        color: var(--gray);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .cta-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-light) 100%
+        );
+        padding: 4rem 0;
+        color: white;
+        text-align: center;
+        margin-top: 4rem;
+      }
+
+      .cta-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+
+      .cta-description {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .cta-button {
+        background: white;
+        color: var(--primary);
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        color: var(--primary);
+      }
+
+      @media (max-width: 768px) {
+        .about-title {
+          font-size: 2.5rem;
+        }
+
+        .about-section {
+          padding: 60px 0;
+        }
+
+        .feature-card {
+          margin-bottom: 2rem;
+        }
+
+        .team-section {
+          padding: 3rem 0;
+        }
+
+        .cta-title {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="about-header">
+          <h1 class="about-title">About Our Feedback System</h1>
+          <p class="about-subtitle">
+            Empowering organizations to collect, analyze, and act on valuable
+            customer feedback
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3 class="feature-title">Analytics Dashboard</h3>
+              <p class="feature-description">
+                Gain valuable insights with our comprehensive analytics
+                dashboard. Track feedback trends, measure satisfaction, and make
+                data-driven decisions.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-bell"></i>
+              </div>
+              <h3 class="feature-title">Real-time Notifications</h3>
+              <p class="feature-description">
+                Stay informed with instant notifications. Receive alerts for new
+                feedback and important updates to ensure timely responses.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3 class="feature-title">Secure & Reliable</h3>
+              <p class="feature-description">
+                Your data security is our priority. Our system is built with
+                enterprise-grade security measures to protect your valuable
+                feedback data.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-section">
+          <h2 class="team-title">Our Team</h2>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="team-card">
+                <img
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  alt="Team Member"
+                  class="team-image"
+                />
+                <div class="team-info">
+                  <h3 class="team-name">John Doe</h3>
+                  <p class="team-role">Founder & CEO</p>
+                  <p class="team-description">
+                    With over 10 years of experience in customer feedback
+                    systems, John leads our team with vision and expertise.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="team-card">
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  alt="Team Member"
+                  class="team-image"
+                />
+                <div class="team-info">
+                  <h3 class="team-name">Jane Smith</h3>
+                  <p class="team-role">Product Manager</p>
+                  <p class="team-description">
+                    Jane ensures our feedback system meets the highest standards
+                    of usability and functionality.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="team-card">
+                <img
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  alt="Team Member"
+                  class="team-image"
+                />
+                <div class="team-info">
+                  <h3 class="team-name">Mike Johnson</h3>
+                  <p class="team-role">Lead Developer</p>
+                  <p class="team-description">
+                    Mike leads our development team, ensuring our system is
+                    robust, scalable, and secure.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <h2 class="cta-title">Ready to Get Started?</h2>
+          <p class="cta-description">
+            Join thousands of organizations using our feedback system to improve
+            their services
+          </p>
+          <a href="/submit" class="cta-button"> Submit Feedback Now </a>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
